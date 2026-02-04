@@ -4,12 +4,9 @@ import { motion } from "framer-motion";
 import {
   BarChart3,
   Briefcase,
-  Building2,
-  ChevronRight,
   Cpu,
   FilePieChart,
   Landmark,
-  ShieldCheck,
   Sparkles,
 } from "lucide-react";
 
@@ -21,39 +18,41 @@ const fadeUp = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
+      <header className="sticky top-0 z-30 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
+          <div className="flex items-center gap-3">
           <span className="text-xl font-semibold tracking-[0.3em] text-[#d4af37]">
             SIMULA
           </span>
           <span className="rounded-full border border-[#d4af37]/40 px-3 py-1 text-xs uppercase text-[#d4af37]">
             GOV
           </span>
-        </div>
-        <nav className="hidden items-center gap-6 text-sm text-[#b3b3c7] md:flex">
-          <a className="hover:text-white" href="#como-funciona">
-            Como funciona
-          </a>
-          <a className="hover:text-white" href="#para-quem">
-            Para quem
-          </a>
-          <a className="hover:text-white" href="#cases">
-            Casos de uso
-          </a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <a
-            className="rounded-full border border-[#d4af37]/40 px-4 py-2 text-xs uppercase text-[#d4af37] hover:border-[#d4af37]"
-            href="/login"
-          >
-            Entrar
-          </a>
-          <a
-            className="hidden rounded-full bg-[#d4af37] px-4 py-2 text-xs font-semibold text-[#0a0a0f] md:inline-flex"
-            href="#cta"
-          >
-            Solicitar demonstração
-          </a>
+          </div>
+          <nav className="hidden items-center gap-6 text-sm text-[#b3b3c7] md:flex">
+            <a className="hover:text-white" href="#recursos">
+              Recursos
+            </a>
+            <a className="hover:text-white" href="#modulos">
+              Módulos
+            </a>
+            <a className="hover:text-white" href="#contato">
+              Contato
+            </a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <a
+              className="rounded-full border border-[#d4af37]/40 px-4 py-2 text-xs uppercase text-[#d4af37] hover:border-[#d4af37]"
+              href="/login"
+            >
+              Entrar
+            </a>
+            <a
+              className="hidden rounded-full bg-[#d4af37] px-4 py-2 text-xs font-semibold text-[#0a0a0f] md:inline-flex"
+              href="#cta"
+            >
+              Solicitar demo
+            </a>
+          </div>
         </div>
       </header>
 
@@ -70,37 +69,33 @@ export default function Home() {
               <Sparkles className="h-4 w-4" />
               Inteligência econômica
             </div>
-            <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
-              Simule decisões de bilhões antes de implementar
+            <h1 className="font-display text-4xl font-semibold leading-tight md:text-5xl">
+              Plataforma de Inteligência Econômica
             </h1>
             <p className="text-lg text-[#b3b3c7]">
-              O SimulaGov antecipa impactos tributários, sociais e fiscais em
-              segundos, permitindo decisões públicas com confiança e evidências.
+              Simule decisões de bilhões antes de implementar.
             </p>
             <div className="flex flex-wrap gap-4">
               <a
-                href="/dashboard"
+                href="#cta"
                 className="rounded-full bg-[#d4af37] px-6 py-3 text-sm font-semibold text-[#0a0a0f] transition hover:brightness-110"
               >
-                Acessar dashboard
+                Solicitar Demonstração
               </a>
               <a
-                href="#cta"
+                href="/login"
                 className="rounded-full border border-[#d4af37]/40 px-6 py-3 text-sm font-semibold text-[#d4af37] hover:border-[#d4af37]"
               >
-                Solicitar demonstração
+                Entrar
               </a>
             </div>
             <div className="grid gap-6 text-sm text-[#b3b3c7] sm:grid-cols-3">
               {[
-                { label: "Agentes simulados", value: "200M+" },
-                { label: "Resultados em segundos", value: "< 5s" },
-                { label: "Precisão estatística", value: "99%" },
+                { label: "agentes", value: "200M+" },
+                { label: "tempo", value: "< 1 segundo" },
+                { label: "precisão", value: "99.2%" },
               ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur"
-                >
+                <div key={stat.label} className="glass-card rounded-2xl p-4">
                   <p className="text-2xl font-semibold text-white">
                     {stat.value}
                   </p>
@@ -116,17 +111,17 @@ export default function Home() {
             animate="visible"
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-3xl border border-[#d4af37]/20 bg-white/5 p-8 backdrop-blur"
+            className="glass-card rounded-3xl border border-[#d4af37]/20 p-8"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-[#d4af37]">
-                Painel Executivo
+              <h2 className="font-display text-xl font-semibold text-[#d4af37]">
+                Visão executiva
               </h2>
-              <ShieldCheck className="h-5 w-5 text-[#d4af37]" />
+              <FilePieChart className="h-5 w-5 text-[#d4af37]" />
             </div>
             <p className="mt-3 text-sm text-[#b3b3c7]">
-              Modelos auditáveis e indicadores críticos prontos para conselhos,
-              ministérios e comissões.
+              Modelos auditáveis, indicadores críticos e trilhas de decisão em
+              uma única plataforma.
             </p>
             <div className="mt-6 space-y-4 text-sm text-white">
               {[
@@ -146,28 +141,28 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <section id="como-funciona" className="space-y-8">
+        <section id="recursos" className="space-y-8">
           <div className="flex items-center gap-3">
             <Cpu className="h-5 w-5 text-[#d4af37]" />
-            <h2 className="text-2xl font-semibold">Como funciona</h2>
+            <h2 className="font-display text-2xl font-semibold">Recursos</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: "Coleta inteligente",
-                text: "Integra dados de arrecadação, população e mercado.",
+                title: "Governança total",
+                text: "Permissões por órgão, trilhas e auditoria contínua.",
               },
               {
-                title: "Modelagem fiscal",
-                text: "Define regras de tributação e incentivos.",
+                title: "Simulações massivas",
+                text: "Milhões de agentes processados em segundos.",
               },
               {
-                title: "Simulação em massa",
-                text: "Roda milhões de agentes em segundos.",
+                title: "Indicadores estratégicos",
+                text: "KPIs claros para tomada de decisão imediata.",
               },
               {
-                title: "Decisão estratégica",
-                text: "Entrega insights prontos para decisão.",
+                title: "Relatórios premium",
+                text: "Exportações prontas para conselhos e comissões.",
               },
             ].map((item, index) => (
               <motion.div
@@ -177,10 +172,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+                className="glass-card rounded-2xl p-6"
               >
                 <p className="text-xs uppercase tracking-[0.3em] text-[#d4af37]">
-                  Passo {index + 1}
+                  Destaque {index + 1}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
                 <p className="mt-2 text-sm text-[#b3b3c7]">{item.text}</p>
@@ -189,33 +184,66 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="modulos" className="space-y-8">
+          <div className="flex items-center gap-3">
+            <BarChart3 className="h-5 w-5 text-[#d4af37]" />
+            <h2 className="font-display text-2xl font-semibold">
+              Os 4 módulos
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              {
+                title: "Diagnóstico Situacional",
+                text: "Análise de indicadores macro e micro.",
+              },
+              {
+                title: "Simulador de Cenários",
+                text: "Milhões de agentes em segundos.",
+              },
+              {
+                title: "Planejamento Estratégico",
+                text: "Eixos e metas do mandato.",
+              },
+              {
+                title: "Monitoramento e Relatórios",
+                text: "Dashboards e exports.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="glass-card rounded-2xl p-6">
+                <h3 className="text-lg font-semibold text-[#d4af37]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm text-[#b3b3c7]">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section id="para-quem" className="space-y-8">
           <div className="flex items-center gap-3">
-            <Building2 className="h-5 w-5 text-[#d4af37]" />
-            <h2 className="text-2xl font-semibold">Para quem</h2>
+            <Landmark className="h-5 w-5 text-[#d4af37]" />
+            <h2 className="font-display text-2xl font-semibold">Para quem</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {[
               {
-                title: "Governos",
+                title: "Governos Estaduais e Federais",
                 icon: <Landmark className="h-5 w-5 text-[#d4af37]" />,
-                text: "Modelos tributários e políticas públicas baseadas em evidências.",
+                text: "Políticas públicas baseadas em evidências e simulações.",
               },
               {
-                title: "Grandes Empresas",
+                title: "Grandes Corporações",
                 icon: <Briefcase className="h-5 w-5 text-[#d4af37]" />,
-                text: "Planejamento fiscal e análise de risco regulatório.",
+                text: "Planejamento fiscal, cenários e risco regulatório.",
               },
               {
-                title: "Consultorias",
+                title: "Consultorias (Big Four)",
                 icon: <BarChart3 className="h-5 w-5 text-[#d4af37]" />,
                 text: "Estudos econômicos e relatórios premium para clientes.",
               },
             ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-              >
+              <div key={item.title} className="glass-card rounded-2xl p-6">
                 <div className="flex items-center gap-3">
                   {item.icon}
                   <h3 className="text-lg font-semibold">{item.title}</h3>
@@ -226,73 +254,43 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="cases" className="space-y-8">
-          <div className="flex items-center gap-3">
-            <FilePieChart className="h-5 w-5 text-[#d4af37]" />
-            <h2 className="text-2xl font-semibold">Casos de uso</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Mudanças tributárias",
-                text: "Avalie impactos antes de aprovar reformas fiscais.",
-              },
-              {
-                title: "Análise de cenários",
-                text: "Compare arrecadação e bem-estar em múltiplas hipóteses.",
-              },
-              {
-                title: "Recuperação de créditos",
-                text: "Identifique oportunidades de recuperação e otimização.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-              >
-                <h3 className="text-lg font-semibold text-[#d4af37]">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm text-[#b3b3c7]">{item.text}</p>
-                <div className="mt-4 inline-flex items-center gap-2 text-xs uppercase text-[#d4af37]">
-                  Ver detalhes <ChevronRight className="h-4 w-4" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section
           id="cta"
-          className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#11111a] via-[#0f0f17] to-[#11111a] p-10 text-center"
+          className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#12121a] via-[#0f0f17] to-[#12121a] p-10 text-center"
         >
-          <h2 className="text-2xl font-semibold">
-            Leve inteligência econômica para o seu governo
+          <h2 className="font-display text-2xl font-semibold">
+            Transforme decisões públicas com inteligência econômica
           </h2>
           <p className="mt-4 text-sm text-[#b3b3c7]">
-            Solicite uma demonstração e veja o SimulaGov em ação com seus dados.
+            Solicite uma demonstração e veja o SIMULA operando com seus dados.
           </p>
           <a
             href="/login"
             className="mt-6 inline-flex items-center justify-center rounded-full bg-[#d4af37] px-6 py-3 text-sm font-semibold text-[#0a0a0f] transition hover:brightness-110"
           >
-            Solicitar demonstração
+            Solicitar Demonstração
           </a>
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-[#0a0a0f] py-10">
+      <footer
+        id="contato"
+        className="border-t border-white/10 bg-[#0a0a0f] py-10"
+      >
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 text-sm text-[#b3b3c7] md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-lg font-semibold text-white">SIMULA GOV</p>
-            <p>Plataforma estratégica para políticas públicas</p>
+            <p className="text-lg font-semibold text-white">SIMULA</p>
+            <p>Plataforma estratégica de inteligência econômica</p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <span>Governança</span>
-            <span>Privacidade</span>
+            <span>Recursos</span>
+            <span>Módulos</span>
             <span>Contato</span>
           </div>
         </div>
+        <p className="mt-6 text-center text-xs text-[#6f6f87]">
+          © 2026 SIMULA - Uma empresa Allhinko
+        </p>
       </footer>
     </div>
   );

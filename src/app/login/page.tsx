@@ -2,23 +2,19 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-const FIXED_EMAIL = "feliciofc@gmail.com";
-const FIXED_PASSWORD = "Dcd318798$";
+import { useAuth } from "../providers/AuthProvider";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (email === FIXED_EMAIL && password === FIXED_PASSWORD) {
-      if (typeof window !== "undefined") {
-        localStorage.setItem("simula-auth", "true");
-        localStorage.setItem("simula-user", email);
-      }
+    const ok = login(email, password);
+    if (ok) {
       setError(null);
       router.push("/dashboard");
       return;
