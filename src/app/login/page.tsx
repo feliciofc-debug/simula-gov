@@ -15,6 +15,10 @@ export default function LoginPage() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (email === FIXED_EMAIL && password === FIXED_PASSWORD) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("simula-auth", "true");
+        localStorage.setItem("simula-user", email);
+      }
       setError(null);
       router.push("/dashboard");
       return;
