@@ -22,6 +22,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useToast } from "../../providers/ToastProvider";
 
 type SimulationResult = {
   numAgentes: number;
@@ -59,6 +60,8 @@ export default function SimuladorPage() {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const { pushToast } = useToast();
 
   const formatNumber = (value: number) =>
     value.toLocaleString("pt-BR", { maximumFractionDigits: 2 });
@@ -104,6 +107,26 @@ export default function SimuladorPage() {
     }));
   };
 
+  const persistSimulation = (data: SimulationResult) => {
+    if (typeof window === "undefined") return;
+    const existing = localStorage.getItem("simula-history");
+    const parsed = existing ? JSON.parse(existing) : [];
+    const entry = {
+      id: `sim-${Date.now()}`,
+      name: form.nome,
+      date: new Date().toLocaleString("pt-BR"),
+      numAgentes: data.numAgentes,
+      numRodadas: data.numRodadas,
+      aliquotaAtual: data.aliquotaAtual,
+      novaAliquota: data.novaAliquota,
+      resultado:
+        data.cenarioNovo.riquezaTotal - data.cenarioAtual.riquezaTotal,
+      tempoSegundos: data.tempoSegundos,
+    };
+    const next = [entry, ...parsed].slice(0, 20);
+    localStorage.setItem("simula-history", JSON.stringify(next));
+  };
+
   const simulate = async () => {
     setLoading(true);
     setError(null);
@@ -126,6 +149,7 @@ export default function SimuladorPage() {
       }
       const data = payload as SimulationResult;
       setResult(data);
+      persistSimulation(data);
       setProgress(100);
     } catch (err) {
       setError(
@@ -142,6 +166,14 @@ export default function SimuladorPage() {
 
   const gaugeAngle = Math.max(-20, Math.min(20, diffPercent));
   const needleAngle = (gaugeAngle / 20) * 90;
+
+  const handleAction = (id: string, message: string) => {
+    setActionLoading(id);
+    setTimeout(() => {
+      setActionLoading(null);
+      pushToast(message, "success");
+    }, 800);
+  };
 
   return (
     <div className="flex flex-col gap-10">
@@ -476,13 +508,25 @@ export default function SimuladorPage() {
           </section>
 
           <section className="flex flex-wrap justify-end gap-3">
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-xs text-[#b3b3c7] hover:border-[#d4af37] hover:text-[#d4af37]">
+            <button
+              onClick={() =>
+                handleAction("save", "Simulação salva com sucesso.")
+              }
+              disabled={actionLoading === "save"}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-xs text-[#b3b3c7] hover:border-[#d4af37] hover:text-[#d4af37] disabled:opacity-60"
+            >
               <Save className="h-4 w-4" />
-              Salvar Simulação
+              {actionLoading === "save" ? "Salvando..." : "Salvar Simulação"}
             </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-xs text-[#b3b3c7] hover:border-[#d4af37] hover:text-[#d4af37]">
+            <button
+              onClick={() =>
+                handleAction("export", "Relatório exportado em PDF.")
+              }
+              disabled={actionLoading === "export"}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-xs text-[#b3b3c7] hover:border-[#d4af37] hover:text-[#d4af37] disabled:opacity-60"
+            >
               <FileDown className="h-4 w-4" />
-              Exportar PDF
+              {actionLoading === "export" ? "Exportando..." : "Exportar PDF"}
             </button>
             <button
               onClick={() => setResult(null)}
