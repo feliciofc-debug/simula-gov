@@ -1,4 +1,27 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+const FIXED_EMAIL = "feliciofc@gmail.com";
+const FIXED_PASSWORD = "Dcd318798$";
+
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (email === FIXED_EMAIL && password === FIXED_PASSWORD) {
+      setError(null);
+      router.push("/dashboard");
+      return;
+    }
+    setError("Credenciais inválidas. Verifique e tente novamente.");
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] px-6 py-12 text-white">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-10">
@@ -25,12 +48,14 @@ export default function LoginPage() {
               simulações e relatórios estratégicos.
             </p>
 
-            <form className="mt-8 space-y-5">
+            <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm text-[#b3b3c7]">E-mail</label>
                 <input
                   type="email"
                   placeholder="nome.sobrenome@gov.br"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   className="w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-sm text-white placeholder:text-[#59607a] focus:border-[#d4af37] focus:outline-none"
                 />
               </div>
@@ -39,15 +64,22 @@ export default function LoginPage() {
                 <input
                   type="password"
                   placeholder="••••••••"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   className="w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-3 text-sm text-white placeholder:text-[#59607a] focus:border-[#d4af37] focus:outline-none"
                 />
               </div>
               <button
-                type="button"
+                type="submit"
                 className="w-full rounded-full bg-[#d4af37] py-3 text-sm font-semibold text-[#0a0a0f] transition hover:brightness-110"
               >
                 Entrar
               </button>
+              {error && (
+                <div className="rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-200">
+                  {error}
+                </div>
+              )}
             </form>
           </div>
 
