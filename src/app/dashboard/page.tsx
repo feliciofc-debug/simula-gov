@@ -22,7 +22,7 @@ type SimulationResult = {
   tempoSegundos: number;
 };
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://api2.amzofertas.com.br:8080";
 
 export default function DashboardPage() {
   const [form, setForm] = useState({
